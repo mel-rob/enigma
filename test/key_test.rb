@@ -22,11 +22,11 @@ class KeyTest < Minitest::Test
   end
 
   def test_it_converts_string_to_array
-    assert_equal ["1", "2", "3", "4", "5"], @key.convert_string_to_array
+    assert_equal [1, 2, 3, 4, 5], @key.convert_string_to_array
   end
 
   def test_generate_keys
-    assert_equal ["12", "23", "34", "45"], @key.generate_keys
+    assert_equal [12, 23, 34, 45], @key.generate_keys
   end
 
 end
