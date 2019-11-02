@@ -29,7 +29,7 @@ class OffsetTest < Minitest::Test
   end
 
   def test_it_can_generate_offsets
-    assert_equal ["2", "1", "6", "1"], @offset.generate_offsets
+    assert_equal [2, 1, 6, 1], @offset.generate_offsets
   end
 
 end
