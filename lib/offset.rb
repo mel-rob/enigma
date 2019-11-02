@@ -19,7 +19,8 @@ class Offset
   end
 
   def generate_offsets
-    get_last_four_characters.chars
+    offsets = get_last_four_characters.chars
+    offsets.map { |offset| offset.to_i }
   end
 
 end
