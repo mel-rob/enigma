@@ -26,4 +26,14 @@ class ShiftTest < Minitest::Test
     assert_equal [12, 14, 45, 33], @shift.generate_shift
   end
 
+  def test_final_shift
+    expected = {
+                "A" => 1,
+                "B" => 2,
+                "C" => 3,
+                "D" => 4
+                }
+    assert_equal expected, @shift.final_shift
+  end
+
 end
