@@ -13,8 +13,15 @@ class Shift
 
   # add logic to account for 3-digit shift numbers?
   def generate_shift
-    shift = zip_arrays.reduce([]) do |acc, array|
+    zip_arrays.reduce([]) do |acc, array|
      acc << array.sum
     end
   end
+
+  def final_shift
+    letters = ["A", "B", "C", "D"]
+    numbers = generate_shift
+    x = letters.zip(numbers).to_h
+  end
+
 end

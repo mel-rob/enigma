@@ -11,7 +11,7 @@ class Key
   end
 
   def convert_string_to_array
-    convert_number_to_string.each_char.map { |c| Integer(c) }
+    convert_number_to_string.each_char.map { |char| Integer(char) }
   end
 
   def generate_keys
