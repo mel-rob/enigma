@@ -16,6 +16,5 @@ class Shift
     shift = zip_arrays.reduce([]) do |acc, array|
      acc << array.sum
     end
-    require "pry"; binding.pry
   end
 end
