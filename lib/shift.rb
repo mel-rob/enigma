@@ -1,27 +1,26 @@
 class Shift
 
-  attr_reader :key, :offset
-
-  def initialize
-    @key = Key.new.generate_keys
-    @offset = Offset.new.generate_offsets
+  def self.generate_keys(key)
+    key_values = []
+    key.chars.each_cons(2).map {|number| key_values << number }
+    a = key_values.map { |key| key.join.to_i }
   end
 
-  def zip_arrays
-    @key.zip(@offset)
+  def self.generate_offsets(date)
+    squared_date = date.to_i ** 2
+    offsets = squared_date.to_s[-4..-1].chars
+    offsets.map { |offset| offset.to_i }
   end
 
-  # add logic to account for 3-digit shift numbers?
-  def generate_shift
-    zip_arrays.reduce([]) do |acc, array|
+  def self.zip_arrays(key, date)
+    keys = generate_keys(key)
+    offsets = generate_offsets(date)
+    combined = keys.zip(offsets)
+  end
+
+  def self.generate_shift(key, date)
+    zip_arrays(key, date).reduce([]) do |acc, array|
      acc << array.sum
     end
   end
-
-  def final_shift
-    letters = ["A", "B", "C", "D"]
-    numbers = generate_shift
-    x = letters.zip(numbers).to_h
-  end
-
 end

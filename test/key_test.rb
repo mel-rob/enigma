@@ -1,32 +1,18 @@
 require_relative './test_helper'
 require './lib/key'
 
-
 class KeyTest < Minitest::Test
 
-  def setup
-    @key = Key.new
+  def test_it_generates_number
+    Key.expects(:get_number).returns("12345")
+    assert_equal "12345", Key.get_number
   end
 
-  def test_it_exists
-    assert_instance_of Key, @key
-  end
+  # Why does coverage go from 66% to 100% when running
+  # the below test?
 
-  def test_it_initializes
-    assert_equal 37834, @key.random_number
-  end
-
-  def test_it_converts_number_to_string
-    assert_equal 5, @key.convert_number_to_string.length
-    assert_equal "12345", @key.convert_number_to_string
-  end
-
-  def test_it_converts_string_to_array
-    assert_equal [1, 2, 3, 4, 5], @key.convert_string_to_array
-  end
-
-  def test_generate_keys
-    assert_equal [12, 23, 34, 45], @key.generate_keys
-  end
+  # def test_number_generates
+  #   assert_equal "011119", Key.get_number
+  # end
 
 end
