@@ -24,7 +24,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt
-    skip
     message = "hello world!"
     key = "02715"
     date = "040895"
@@ -40,8 +39,10 @@ class EnigmaTest < Minitest::Test
 
   def test_it_can_encrypt_without_key_and_date
     message = "hello world!"
-    
-    assert_equal "keder ohulw!", @enigma.encrypt(message)
+
+    assert_equal 12, @enigma.encrypt(message)[:encryption].length
+    assert_equal String, @enigma.encrypt(message)[:encryption].class
+    assert_equal true, @enigma.encrypt(message)[:encryption].include?("!")
   end
 
   def test_it_can_encrypt_with_incorrect_key_and_date
@@ -49,8 +50,14 @@ class EnigmaTest < Minitest::Test
     key = "123"
     date = 123
 
-    assert_equal "keder ohulw!", @enigma.encrypt(message, key, date)
+    assert_equal 5, @enigma.encrypt(message, key, date)[:key].length
+    assert_equal String, @enigma.encrypt(message, key, date)[:key].class
+
+    assert_equal 6, @enigma.encrypt(message, key, date)[:date].length
+    assert_equal String, @enigma.encrypt(message, key, date)[:date].class
+
+    assert_equal 12, @enigma.encrypt(message, key, date)[:encryption].length
+    assert_equal String, @enigma.encrypt(message, key, date)[:encryption].class
+    assert_equal true, @enigma.encrypt(message, key, date)[:encryption].include?("!")
   end
-
-
 end
