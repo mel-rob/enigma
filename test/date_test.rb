@@ -1,7 +1,7 @@
 require_relative './test_helper'
 require './lib/date'
 
-class GenerateDateTest < Minitest::Test
+class DateTest < Minitest::Test
 
   def test_it_generates_date
    Date.expects(:get_date).returns("011119")
