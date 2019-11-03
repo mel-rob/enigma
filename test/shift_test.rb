@@ -1,39 +1,29 @@
 require_relative './test_helper'
-require './lib/key'
-require './lib/offset'
 require './lib/shift'
 
 class ShiftTest < Minitest::Test
 
-  def setup
-    @shift = Shift.new
-  end
+  def test_it_can_generate_key_values
+    key = "12345"
+    assert_equal [12, 23, 34, 45], Shift.generate_keys(key)
+   end
 
-  def test_it_exists
-    assert_instance_of Shift, @shift
-  end
+   def test_it_can_generate_offset_values
+     date = "011119"
+     assert_equal [2, 1, 6, 1], Shift.generate_offsets(date)
+   end
 
-  def test_it_initializes_with_key_and_shift
-    assert_equal [12, 23, 34, 35], @shift.key
-    assert_equal [1, 2, 3, 4], @shift.offset
-  end
+   def test_it_can_zip_arrays
+     key = "12345"
+     date = "011119"
+     expected = [[12, 2], [23, 1], [34, 6], [45, 1]]
+     assert_equal expected, Shift.zip_arrays(key, date)
+   end
 
-  def test_it_can_zip_arrays
-    assert_equal [[62, 2], [20, 1], [0, 6], [5, 1]], @shift.zip_arrays
-  end
-
-  def test_it_can_generate_shift
-    assert_equal [12, 14, 45, 33], @shift.generate_shift
-  end
-
-  def test_final_shift
-    expected = {
-                "A" => 1,
-                "B" => 2,
-                "C" => 3,
-                "D" => 4
-                }
-    assert_equal expected, @shift.final_shift
-  end
-
+   def test_it_can_generate_shift
+     key = "12345"
+     date = "011119"
+     expected = [14, 24, 40, 46]
+     assert_equal expected, Shift.generate_shift(key, date)
+   end
 end
