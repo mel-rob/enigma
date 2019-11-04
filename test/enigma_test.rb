@@ -48,7 +48,8 @@ class EnigmaTest < Minitest::Test
   def test_it_can_encrypt_with_incorrect_key_and_date
     message = "hello world!"
     key = "123"
-    date = 123
+    date = "123"
+    # date = 123
 
     assert_equal 5, @enigma.encrypt(message, key, date)[:key].length
     assert_equal String, @enigma.encrypt(message, key, date)[:key].class
@@ -59,5 +60,28 @@ class EnigmaTest < Minitest::Test
     assert_equal 12, @enigma.encrypt(message, key, date)[:encryption].length
     assert_equal String, @enigma.encrypt(message, key, date)[:encryption].class
     assert_equal true, @enigma.encrypt(message, key, date)[:encryption].include?("!")
+  end
+
+  def test_it_can_decrypt
+    message = "keder ohulw!"
+    key = "02715"
+    date = "040895"
+
+    expected = {
+                :decryption=>"hello world!",
+                :key=>"02715",
+                :date=>"040895"
+                }
+
+    assert_equal expected, @enigma.decrypt(message, key, date)
+  end
+
+  def test_it_can_decrypt_without_date
+    message = "keder ohulw!"
+    key = "02715"
+
+    assert_equal 12, @enigma.decrypt(message, key)[:decryption].length
+    assert_equal String, @enigma.decrypt(message, key)[:decryption].class
+    assert_equal true, @enigma.decrypt(message, key)[:decryption].include?("!")
   end
 end
