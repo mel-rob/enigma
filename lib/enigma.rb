@@ -1,5 +1,5 @@
-require_relative 'generatedate'
-require_relative 'key'
+require_relative 'generate_date'
+require_relative 'generate_key'
 require_relative 'shift'
 require_relative 'encrypt'
 require_relative 'decrypt'
@@ -9,8 +9,8 @@ class Enigma
   include Verifiable
 
   def initialize
-    @date = GenerateDate.get_date
-    @key = Key.get_number
+    @date = GenerateDate.date
+    @key = GenerateKey.number
     @encrypt = Encrypt.new
     @decrypt = Decrypt.new
   end
@@ -33,5 +33,4 @@ class Enigma
       date: date
     }
   end
-
 end
